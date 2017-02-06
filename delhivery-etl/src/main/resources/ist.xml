@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="query">
+        
+	<insert id="insertIST" parameterType="java.util.Map"
+		keyProperty="ist_number">
+		INSERT INTO PUBLIC.IST
+		(
+		ist_number,
+		destination_center,
+		mongo_id,
+		vehicle_mode,
+		bag_count,
+		bag_weight,
+		bag_volumetric_weight,
+		origin_center,
+		coloaders,
+		vehicle_registration_number,
+		last_updated_time,
+		connection		
+		)
+		VALUES
+		(
+		#{ist_number},
+		#{destination_center},
+		#{mongo_id},
+		#{vehicle_mode},
+		#{bag_count},
+		#{bag_weight},
+		#{bag_volumetric_weight},
+		#{coloaders},
+		#{vehicle_registration_number},
+		#{last_updated_time},
+		#{connection}
+		)
+	</insert>
+
+	<insert id="insertISTScan" parameterType="java.util.List">
+		INSERT INTO PUBLIC.IST_SCAN_FACTS
+			(
+			ist_number,
+			origin_center,
+			scan_location_center,
+			scan_destination_center,
+			action_code,
+			updated_by,
+			scanned_date,
+			updated_date,
+			coloaders,
+			vehicle_registration_number,
+			connection,
+			last_updated_time,
+			scanned_datetime,
+			updated_datetime,
+			destination_center,
+			status_type,
+			status_code,
+			status_remarks,
+			status_additional_remarks
+			)
+			VALUES
+		<foreach collection="list" item="istscan" separator=",">
+			(
+			#{istscan.ist_number},
+			#{istscan.origin_center},
+			#{istscan.scan_location_center},
+			#{istscan.scan_destination_center},
+			#{istscan.action_code},
+			#{istscan.updated_by},
+			substring(#{istscan.scanned_date},1,10),
+			substring(#{istscan.updated_date},1,10),
+			#{istscan.coloaders},
+			#{istscan.vehicle_registration_number},
+			#{istscan.connection},
+			to_timestamp(#{istscan.last_updated_time},'YYYY-MM-DDTHH:MI:SS.MS'),
+			to_timestamp(#{istscan.scanned_datetime},'YYYY-MM-DDTHH:MI:SS.MS'),
+			to_timestamp(#{istscan.updated_datetime},'YYYY-MM-DDTHH:MI:SS.MS'),
+			<!-- CONVERT(timestamp, #{istscan.last_updated_time}),
+			CONVERT(timestamp, #{istscan.scanned_datetime}),
+			CONVERT(timestamp, #{istscan.updated_datetime}), -->
+			#{istscan.destination_center},
+			#{istscan.status_type},
+			#{istscan.status_code},
+			#{istscan.status_remarks},
+			#{istscan.status_additional_remarks}
+			)
+		</foreach>
+	</insert>
+
+	<insert id="insertISTDev" parameterType="java.util.Map">
+		INSERT INTO PUBLIC.IST
+		(
+		ist_number,
+		connection,
+		origin_center,
+		destination_center,
+		coloaders,
+		vehicle_registration_number,
+		vehicle_mode,
+		bag_count,
+		bag_weight,
+		bag_volumetric_weight,
+		mongo_id,
+		last_updated_time
+		)
+		VALUES
+		(
+		#{ist_number},
+		#{connection},
+		#{origin_center},
+		#{destination_center},
+		#{coloaders},
+		#{vehicle_registration_number},
+		#{vehicle_mode},
+		#{bag_count},
+		#{bag_weight},
+		#{bag_volumetric_weight},
+		#{mongo_id},
+		to_timestamp(#{last_updated_time},'YYYY-MM-DDTHH:MI:SS.MS')
+		<!-- CONVERT(timestamp, #{last_updated_time}) -->
+		)
+	</insert>
+	
+	</mapper>

@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="query">
+
+	<select id="selectWbnFromIST" parameterType="java.lang.String"
+		resultType="java.lang.String">
+		select ist_number from IST where mongo_id = #{id} limit 1
+	</select>
+
+
+	<insert id="insertBag" parameterType="java.util.Map">
+		INSERT INTO PUBLIC.BAG
+		(
+		bag_seal_number,
+		type,
+		total_value,
+		cod_value,
+		dim_weight,
+		dim_volumetric_weight,
+		dim_breadth,
+		dim_height,
+		dim_summation_weight,
+		dim_length,
+		parent_bag_seal_number,
+		origin_center,
+		destination_center,
+		last_updated_by,
+		created_date,
+		created_datetime,
+		updated_date,
+		updated_datetime,
+		iscomplete,
+		station,
+		zone,
+		first_pending_date,
+		first_pending_datetime,
+		mongo_id,
+		operation
+		)
+		VALUES
+		(
+		#{bag_seal_number},
+		#{type},
+		#{total_value},
+		#{cod_value},
+		#{dim_weight},
+		#{dim_volumetric_weight},
+		#{dim_breadth},
+		#{dim_height},
+		#{dim_summation_weight},
+		#{dim_length},
+		#{parent_bag_seal_number},
+		#{origin_center},
+		#{destination_center},
+		#{last_updated_by},
+		#{created_date},
+		to_timestamp(#{created_datetime},'YYYY-MM-DDTHH:MI:SS.MS'),
+		#{updated_date},
+		to_timestamp(#{updated_datetime},'YYYY-MM-DDTHH:MI:SS.MS'),
+		#{iscomplete},
+		#{station},
+		#{zone},
+		#{first_pending_date},
+		to_timestamp(#{first_pending_datetime},'YYYY-MM-DDTHH:MI:SS.MS'),
+		#{mongo_id},
+		#{operation}
+		)
+	</insert>
+
+	<insert id="insertBagIst" parameterType="java.util.List">
+		INSERT INTO
+		PUBLIC.BAG_IST
+		(
+		bag_seal_number,
+		ist_number,
+		operation
+		)
+		VALUES
+		<foreach collection="list" item="bagIst" separator=",">
+		(
+		#{bagIst.bag_seal_number},
+		#{bagIst.ist_number},
+		#{bagIst.operation}
+		)
+		</foreach>
+	</insert>
+
+	<insert id="insertBagChildSealNumbers" parameterType="java.util.List">
+		INSERT INTO
+		PUBLIC.BAG_CHILD_SEAL_NUMBERS
+		(
+		bag_seal_number,
+		child_bag_seal_number,
+		operation
+		)
+		VALUES
+		<foreach collection="list" item="bagChildSealNumbers" separator=",">
+		(
+		#{bagChildSealNumbers.bag_seal_number},
+		#{bagChildSealNumbers.child_bag_seal_number},
+		#{bagChildSealNumbers.operation}
+		)
+		</foreach>
+	</insert>
+
+	<insert id="insertBagDispatchDetails" parameterType="java.util.Map">
+		INSERT INTO
+		PUBLIC.BAG_DISPATCH_DETAILS
+		(
+		bag_seal_number,
+		dispatch_waybillnum,
+		dispatch_type,
+		operation
+		)
+		VALUES
+		(
+		#{bag_seal_number},
+		#{dispatch_waybillnum},
+		#{dispatch_type},
+		#{operation}
+		)
+	</insert>
+
+	<insert id="insertBagIncoming" parameterType="java.util.List">
+		INSERT INTO
+		PUBLIC.BAG_INCOMING
+		(
+		bag_seal_number,
+		incoming_date,
+		incoming_datetime,
+		last_incoming_performed_by,
+		remarks,
+		otp,
+		is_waybill_bag,
+		incoming_type,
+		identifier_value,
+		operation
+		)
+		VALUES
+		<foreach collection="list" item="incomingbag" separator=",">
+		(
+		#{incomingbag.bag_seal_number},
+		#{incomingbag.incoming_date},
+		to_timestamp(#{incomingbag.incoming_datetime},'YYYY-MM-DDTHH:MI:SS.MS'),
+		#{incomingbag.last_incoming_performed_by},
+		#{incomingbag.remarks},
+		#{incomingbag.otp},
+		#{incomingbag.is_waybill_bag},
+		#{incomingbag.incoming_type},
+		#{incomingbag.identifier_value},
+		#{incomingbag.operation}
+		)
+	</foreach>	
+	</insert>
+
+	<insert id="insertBagScanFacts" parameterType="java.util.Map">
+		INSERT INTO
+		PUBLIC.BAG_SCAN_FACTS
+		(
+		bag_seal_number,
+		origin_center,
+		destination_center,
+		station,
+		zone,
+		action_code,
+		nsl_code,
+		status_code,
+		status_type,
+		scan_location_center,
+		dispatch_waybillnum_dwbn,
+		ps_ist_number,
+		pid_ist_number,
+		connection,
+		scan_destination_center,
+		scanned_date,
+		source,
+		scanned_datetime,
+		updated_date,
+		updated_datetime,
+		updated_by,
+		last_updated_time,
+		status_remarks,
+		status_additional_remarks,
+		operation
+
+		)
+		VALUES
+		<foreach collection="list" item="bagScanFacts" separator=",">
+		(
+		#{bagScanFacts.bag_seal_number},
+		#{bagScanFacts.origin_center},
+		#{bagScanFacts.destination_center},
+		#{bagScanFacts.station},
+		#{bagScanFacts.zone},
+		#{bagScanFacts.action_code},
+		#{bagScanFacts.nsl_code},
+		#{bagScanFacts.status_code},
+		#{bagScanFacts.status_type},
+		#{bagScanFacts.scan_location_center},
+		#{bagScanFacts.dispatch_waybillnum_dwbn},
+		#{bagScanFacts.ps_ist_number},
+		#{bagScanFacts.pid_ist_number},
+		#{bagScanFacts.connection},
+		#{bagScanFacts.scan_destination_center},
+		#{bagScanFacts.scanned_date},
+		#{bagScanFacts.source},
+		to_timestamp(#{bagScanFacts.scanned_datetime},'YYYY-MM-DDTHH:MI:SS.MS'),
+		#{bagScanFacts.updated_date},
+		to_timestamp(#{bagScanFacts.updated_datetime},'YYYY-MM-DDTHH:MI:SS.MS'),
+		#{bagScanFacts.updated_by},
+		#{bagScanFacts.status_remarks},
+		#{bagScanFacts.status_additional_remarks},
+		#{bagScanFacts.operation}
+		)
+		</foreach>
+	</insert>
+
+
+	<insert id="insertBagDispatch" parameterType="java.util.Map">
+		INSERT INTO
+		PUBLIC.BAG_DISPATCH
+		(
+		bag_seal_number,
+		dispatch_waybillnum,
+		last_updated_time,
+		operation
+		)
+		VALUES
+		(
+		#{bag_seal_number},
+		#{dispatch_waybillnum},
+		#{last_updated_time},
+		#{operation}
+		)
+	</insert>
+
+</mapper>

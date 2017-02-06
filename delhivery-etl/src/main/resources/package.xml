@@ -1,0 +1,984 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="package">
+
+    <insert id="insertPackage" parameterType="java.util.List">
+        INSERT INTO package
+        (waybillnum, order_id, client_name, pickup_types_code, dim_length, dim_width, dim_height, dim_weight,
+        dim_volume, dim_manualweight, dim_updated_by, dim_updated_date, dim_updated_datetime, clientwarehouse_name,
+        zone, region, item_code, invoice_mode, last_updated_by, last_updatedon_date, last_updatedon_datetime,
+        product_mode, product_type, pickupid, sku, product_details, product_client_hash, dim_weight_businessrule,
+        dim_weight_historical, dim_sorter_weight, origin_center_oc, origin_center_city, destination_center_cn,
+        parent_dispatch_center_dpc, dest_center_city, return_center, return_parent_center_rdpc, return_city,
+        last_updated_date, last_updated_datetime, consignee_name, consignee_address_1, consignee_address_2,
+        consignee_city, consignee_state, consignee_country, consignee_pincode, consignee_email, consignee_phone_1,
+        consignee_phone_2, consignee_phone_3, addr_segment_longitude, addr_segment_latitude, addr_segment_pincode,
+        addr_segment_mismatch, addr_segment_locality_id, addr_segment_locality_id_sub,
+        addr_segment_locality_id_additional, mongo_id, last_updated_time )
+        VALUES
+        <foreach collection="list" item="package" separator=",">
+            (
+            <choose>
+                <when test="package.wbn != null">
+                    #{package.wbn},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.oid != null">
+                    #{package.oid},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.cl != null">
+                    #{package.cl},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.pt != null">
+                    #{package.pt},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.dws != null and package.dws.l != null">
+                    #{package.dws.l},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.dws != null and package.dws.b != null">
+                    #{package.dws.b},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.dws != null and package.dws.h != null">
+                    #{package.dws.h},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.dws != null and package.dws.wt != null">
+                    #{package.dws.wt},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.dws != null and package.dws.v != null">
+                    #{package.dws.v},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.dws != null and package.dws.mwt != null">
+                    #{package.dws.mwt},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.dws != null and package.dws.u != null">
+                    #{package.dws.u},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.dws != null and package.dws.ud != null">
+                    TO_DATE ((TIMESTAMP 'epoch' + #{package.dws.ud.$date}/1000 * INTERVAL '1 Second '), 'YYYY-MM-DD'),
+                    (TIMESTAMP 'epoch' + #{package.dws.ud.$date}/1000 * INTERVAL '1 Second '),
+                </when>
+                <otherwise>
+                    null,null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.pl != null">
+                    #{package.pl},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.zn != null">
+                    #{package.zn},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.rgn != null">
+                    #{package.rgn},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.itc != null">
+                    #{package.itc},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.md != null">
+                    #{package.md},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.u != null">
+                    #{package.u},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.dws != null and package.dws.ud != null">
+                    TO_DATE ((TIMESTAMP 'epoch' + #{package.dws.ud.$date}/1000 * INTERVAL '1 Second '), 'YYYY-MM-DD'),
+                    (TIMESTAMP 'epoch' + #{package.dws.ud.$date}/1000 * INTERVAL '1 Second '),
+                </when>
+                <otherwise>
+                    null,null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.pmode != null">
+                    #{package.pmode},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.ptype != null">
+                    #{package.ptype},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.pupid != null">
+                    #{package.pupid},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.sku != null">
+                    #{package.sku},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.prd != null">
+                    #{package.prd},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.pclh != null">
+                    #{package.pclh},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.bw != null">
+                    #{package.bw},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.gw != null">
+                    #{package.gw},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.swt != null">
+                    #{package.swt},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.oc != null">
+                    RTRIM(regexp_substr(#{package.oc},'[:ALNUM:]*[^\(]*')) ,
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.occ != null">
+                    #{package.occ},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.cn != null">
+                    RTRIM(regexp_substr(#{package.cn},'[:ALNUM:]*[^\(]*')),
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.dpc != null">
+                    #{package.dpc},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.cnc != null">
+                    #{package.cnc},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.rcn != null">
+                    #{package.rcn},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.rdpc != null">
+                    #{package.rdpc},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.rcty != null">
+                    #{package.rcty},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.lu != null">
+                    TO_DATE ((TIMESTAMP 'epoch' + #{package.lu.$date}/1000 * INTERVAL '1 Second '), 'YYYY-MM-DD'),
+                    (TIMESTAMP 'epoch' + #{package.lu.$date}/1000 * INTERVAL '1 Second '),
+                </when>
+                <otherwise>
+                    null,null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.nm != null">
+                    #{package.nm},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.add_1 != null">
+                    #{package.add_1},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.add_2 != null">
+                    #{package.add_2},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.cty != null">
+                    #{package.cty},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.st != null">
+                    #{package.st},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.cnt != null">
+                    #{package.cnt},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.pin != null">
+                    #{package.pin},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.em != null">
+                    #{package.em},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.ph_1 != null">
+                    #{package.ph_1},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.ph_2 != null">
+                    #{package.ph_2},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.ph_3 != null">
+                    #{package.ph_3},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.aseg != null and package.aseg.lon != null">
+                    #{package.aseg.lon},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.aseg != null and package.aseg.lat != null">
+                    #{package.aseg.lat},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.aseg != null and package.aseg.pin != null">
+                    #{package.aseg.pin},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.aseg != null and package.aseg.mismatch != null">
+                    #{package.aseg.mismatch},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.aseg != null and package.aseg.loc != null">
+                    #{package.aseg.loc},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.aseg != null and package.aseg.sloc != null">
+                    #{package.aseg.sloc},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.aseg != null and package.aseg.aloc != null">
+                    #{package.aseg.aloc},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package._id != null and package._id.$oid != null">
+                    #{package._id.$oid},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            SYSDATE)
+        </foreach>
+    </insert>
+
+    <select id="selectWaybillnum" parameterType="java.lang.String" resultType="java.lang.String" >
+        select waybillnum from package where mongo_id = #{id} limit 1
+    </select>
+
+    <delete id="deletePackage" parameterType="java.lang.String">
+        delete from package where waybillnum = #{waybillnum}
+    </delete>
+
+    <insert id="insertPackageBag" parameterType="java.util.Map">
+        INSERT INTO package_bag
+        (waybillnum, bag_seal_number)
+        VALUES
+        <foreach collection="list" item="package" separator=",">
+            (#{package.wbn}, #{package.pid})
+        </foreach>
+    </insert>
+
+    <insert id="insertPackageDispatch" parameterType="java.util.Map">
+        INSERT INTO package_dispatch
+        (waybillnum, dispatch_waybillnum)
+        VALUES
+        <foreach collection="list" item="package" separator=",">
+            (#{package.wbn},
+            <choose>
+                <when test="package.dispatch != null">
+                    #{package.dispatch.dwbn}
+                </when>
+                <otherwise>
+                    null
+                </otherwise>
+            </choose>
+            )
+        </foreach>
+    </insert>
+
+    <insert id="insertPackageDispatchDetails" parameterType="java.util.Map">
+        INSERT INTO package_dispatch_details
+        (waybillnum, latest_dispatch_waybillnum, first_dispatch_date, first_dispatch_datetime, sort, vehicle_name, ist,
+        rto, dispatch_count, return_dispatch_count)
+        VALUES
+        <foreach collection="list" item="package" separator=",">
+            ( #{package.wbn},
+            <choose>
+                <when test="package.dd != null and package.dd.id != null">
+                    #{package.dd.id},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.dd != null and package.dd.id != null">
+                    TO_DATE ((TIMESTAMP 'epoch' + #{package.dd.id.$date}/1000 * INTERVAL '1 Second '), 'YYYY-MM-DD'),
+                    (TIMESTAMP 'epoch' + #{package.dd.id.$date}/1000 * INTERVAL '1 Second '),
+                </when>
+                <otherwise>
+                    null,null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.dd != null and package.dd.srt != null">
+                    #{package.dd.srt},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.dd != null and package.dd.vid != null">
+                    #{package.dd.vid},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.dd != null and package.dd.ist != null">
+                    #{package.dd.ist},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.dd != null and package.dd.rto != null">
+                    #{package.dd.rto},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.dd != null and package.dd.dct != null">
+                    #{package.dd.dct},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.dd != null and package.dd.rdct != null">
+                    #{package.dd.rdct}
+                </when>
+                <otherwise>
+                    null
+                </otherwise>
+            </choose>
+            )
+        </foreach>
+        ;
+    </insert>
+
+    <insert id="insertPackageInvoice" parameterType="java.util.Map">
+        INSERT INTO package_invoice
+        (waybillnum, client_name, invoice_number, invoice_transaction_id, invoice_amount, remittance_transaction_id,
+        remittance_number, remittance_amount, invoice_date, invoice_datetime, remitted, remittance_date,
+        remittance_datetime, invoice_url, charges_types_code, amount)
+        VALUES
+        <foreach collection="list" item="inv" separator=",">
+            ( #{inv.wbn}, #{inv.cl},
+            <choose>
+                <when test="inv.num != null">
+                    #{inv.num},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="inv.tid != null">
+                    #{inv.tid},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="inv.rs != null">
+                    #{inv.rs},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="inv.rtid != null">
+                    #{inv.rtid},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="inv.rnum != null">
+                    #{inv.rnum},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="inv.ramt != null">
+                    #{inv.ramt},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="inv != null and inv.dt != null">
+                    TO_DATE ((TIMESTAMP 'epoch' + #{inv.dt.$date}/1000 * INTERVAL '1 Second '), 'YYYY-MM-DD'),
+                    (TIMESTAMP 'epoch' + #{inv.dt.$date}/1000 * INTERVAL '1 Second '),
+                </when>
+                <otherwise>
+                    null,null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="inv.r != null">
+                    #{inv.r},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="inv != null and inv.rdt != null">
+                    TO_DATE ((TIMESTAMP 'epoch' + #{inv.rdt.$date}/1000 * INTERVAL '1 Second '), 'YYYY-MM-DD'),
+                    (TIMESTAMP 'epoch' + #{inv.rdt.$date}/1000 * INTERVAL '1 Second '),
+                </when>
+                <otherwise>
+                    null,null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="inv.inv_url != null">
+                    #{inv.inv_url},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="inv.charges_type_code != null">
+                    #{inv.charges_type_code},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="inv.amount != null">
+                    #{inv.amount}
+                </when>
+                <otherwise>
+                    null
+                </otherwise>
+            </choose>
+            )
+        </foreach>
+    </insert>
+
+    <insert id="insertPackageItems" parameterType="java.util.Map">
+        INSERT INTO package_items
+        (waybillnum, item_desc, u)
+        VALUES
+        <foreach collection="list" item="package" separator=",">
+            (#{package.wbn}, #{package.dsc}, #{package.u})
+        </foreach>
+    </insert>
+
+    <insert id="insertPackageNcc" parameterType="java.util.Map">
+        INSERT INTO package_ncc
+        (waybillnum, ncc_code)
+        VALUES
+        <foreach collection="list" item="package" separator=",">
+            (#{package.wbn}, #{package.ncc})
+        </foreach>
+    </insert>
+
+    <insert id="insertPackageNsl" parameterType="java.util.Map">
+        INSERT INTO package_nsl
+        (waybillnum, nsl_code, nsl_date, ns_datetime)
+        VALUES
+        (#{wbn},
+        <choose>
+            <when test="nsl != null">
+                #{nsl.code},
+            </when>
+            <otherwise>
+                null,
+            </otherwise>
+        </choose>
+        <choose>
+            <when test="nsl != null and nsl.dt != null">
+                TO_DATE ((TIMESTAMP 'epoch' + #{nsl.dt.$date}/1000 * INTERVAL '1 Second '), 'YYYY-MM-DD'),
+                (TIMESTAMP 'epoch' + #{nsl.dt.$date}/1000 * INTERVAL '1 Second ')
+            </when>
+            <otherwise>
+                null,null
+            </otherwise>
+        </choose>
+        );
+    </insert>
+
+    <insert id="insertPackageProductSegment" parameterType="java.util.Map">
+        INSERT INTO package_product_segment
+        (waybillnum, category, sub_category, isdangerous_category)
+        VALUES
+        <foreach collection="list" separator="," item="package">
+            (#{package.wbn}, null, null, null)
+        </foreach>
+    </insert>
+
+    <insert id="insertPackageResponse" parameterType="java.util.Map">
+        INSERT INTO package_response
+        (waybillnum, action_code, action_date, action_datetime, remarks)
+        VALUES
+        <foreach collection="list" separator="," item="package">
+            (#{package.wbn},
+            <choose>
+                <when test="package.acd != null">
+                    #{package.acd.act},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.acd != null and package.acd.dt != null ">
+                    TO_DATE ((TIMESTAMP 'epoch' + #{package.acd.dt.$date}/1000 * INTERVAL '1 Second '), 'YYYY-MM-DD'),
+                    (TIMESTAMP 'epoch' + #{package.acd.dt.$date}/1000 * INTERVAL '1 Second '),
+                </when>
+                <otherwise>
+                    null,null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="acd != null">
+                    #{package.acd.rmk}
+                </when>
+                <otherwise>
+                    null
+                </otherwise>
+            </choose>
+            )
+        </foreach>
+    </insert>
+
+    <insert id="insertPackageReverseLogistics" parameterType="java.util.Map">
+        INSERT INTO package_reverse_logistics
+        (waybillnum, client_name, return_center, city_name, state, pincode, address_1, address_2, phone_1, phone_2,
+        phone_3)
+        VALUES
+        (#{wbn}, #{cl}, #{rcn}, #{rcty}, #{rst}, #{rpin}, #{radd[0]}, #{radd[1]}, #{rph[0]}, #{rph[1]}, #{rph[2]});
+    </insert>
+
+    <insert id="insertPackageSeller" parameterType="java.util.Map">
+        INSERT INTO package_seller
+        (waybillnum, seller_name, seller_address_1, seller_invoiceid, seller_centersales_tax_number,
+        seller_tax_info_number, seller_invoice_date, seller_invoice_datetime, seller_qty_shipment)
+        VALUES
+        <foreach collection="list" item="package" separator=",">
+            (#{package.wbn}, #{package.snm}, #{package.sadd}, #{package.si}, #{package.cst}, #{package.tin},
+            <choose>
+                <when test="package.sid != null">
+                    TO_DATE ((TIMESTAMP 'epoch' + #{package.sid.$date}/1000 * INTERVAL '1 Second '), 'YYYY-MM-DD'),
+                    (TIMESTAMP 'epoch' + #{package.sid.$date}/1000 * INTERVAL '1 Second '),
+                </when>
+                <otherwise>
+                    null,null,
+                </otherwise>
+            </choose>
+            #{package.qty}
+            )
+        </foreach>
+    </insert>
+
+    <insert id="insertPackageStateBasedTax" parameterType="java.util.Map">
+        INSERT INTO package_state_based_tax
+        (waybillnum, westbengal_tax_eligibility_id, acknowledgement_id, amount, tax_amount, current_user_name,
+        curr_date, curr_datetime)
+        VALUES
+        <foreach collection="list" separator="," item="package">
+            (#{package.wbn},
+            <choose>
+                <when test="package.sbt != null">
+                    #{package.sbt.wbt},
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.sbt != null">
+                    #{package.sbt.ack}
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.sbt != null">
+                    #{package.sbt.amt}
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.sbt != null">
+                    #{package.sbt.tamt}
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.sbt != null">
+                    #{package.u}
+                </when>
+                <otherwise>
+                    null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="package.sbt != null and package.sbt.cd != null">
+                    TO_DATE ((TIMESTAMP 'epoch' + #{package.sbt.cd.$date}/1000 * INTERVAL '1 Second '), 'YYYY-MM-DD'),
+                    (TIMESTAMP 'epoch' + #{package.sbt.cd.$date}/1000 * INTERVAL '1 Second ')
+                </when>
+                <otherwise>
+                    null,null
+                </otherwise>
+            </choose>
+            )
+        </foreach>
+    </insert>
+
+    <insert id="insertPackageDates" parameterType="java.util.List">
+        INSERT INTO package_dates
+        (waybillnum, date_type_code, date_value, datetime_value)
+        VALUES
+        <foreach collection="list" separator="," item="package">
+            (
+            #{package.wbn}, #{package.date_type},
+            TO_DATE ((TIMESTAMP 'epoch' + #{package.date_value}/1000 * INTERVAL '1 Second '), 'YYYY-MM-DD'),
+            (TIMESTAMP 'epoch' + #{package.date_value}/1000 * INTERVAL '1 Second ')
+            )
+        </foreach>
+    </insert>
+
+    <insert id="insertPackageLost" parameterType="java.util.List">
+        INSERT INTO package_lost
+        (waybillnum, lost_package)
+        VALUES
+        <foreach collection="list" item="package" separator=",">
+            (#{package.wbn}, #{package.lp})
+        </foreach>
+    </insert>
+
+    <insert id="insertPackageLocked" parameterType="java.util.List">
+        INSERT INTO package_locked
+        (waybillnum, locked)
+        VALUES
+        <foreach collection="list" item="package" separator=",">
+            (#{package.wbn}, #{package.lock})
+        </foreach>
+    </insert>
+
+    <insert id="insertPackageInvoiceAmount" parameterType="java.util.List">
+        INSERT INTO package_invoice_amount
+        (waybillnum, invoice_amount)
+        VALUES
+        <foreach collection="list" item="package" separator=",">
+            (#{package.wbn}, #{package.rs})
+        </foreach>
+
+    </insert>
+
+    <insert id="insertPackageCodAmount" parameterType="java.util.List">
+        INSERT INTO package_cod_amount
+        (waybillnum, cod_amount)
+        VALUES
+        <foreach collection="list" item="package" separator=",">
+            (#{package.wbn}, #{package.cod})
+        </foreach>
+    </insert>
+
+    <insert id="insertPackageRegion" parameterType="java.util.List">
+        INSERT INTO package_region
+        (waybillnum, region)
+        VALUES
+        <foreach collection="list" item="package" separator=",">
+            (#{package.wbn}, #{package.rgn})
+        </foreach>
+    </insert>
+
+    <insert id="insertPackageZone" parameterType="java.util.List">
+        INSERT INTO package_zone
+        (waybillnum, zone)
+        VALUES
+        <foreach collection="list" item="package" separator=",">
+            (#{package.wbn}, #{package.zn})
+        </foreach>
+    </insert>
+
+    <insert id="insertPackageOriginCentre" parameterType="java.util.List">
+        INSERT INTO package_origin_center_oc
+        (waybillnum, origin_center_oc)
+        VALUES
+        <foreach collection="list" item="package" separator=",">
+            (#{package.wbn}, RTRIM(regexp_substr(#{package.oc},'[:ALNUM:]*[^\(]*')) )
+        </foreach>
+    </insert>
+
+    <insert id="insertPackageOriginCentreCity" parameterType="java.util.List">
+        INSERT INTO package_origin_center_city
+        (waybillnum, origin_center_city)
+        VALUES
+        <foreach collection="list" item="package" separator=",">
+            (#{package.wbn}, #{package.occ})
+        </foreach>
+    </insert>
+
+    <insert id="insertPackageDestinationCentre" parameterType="java.util.List">
+        INSERT INTO package_destination_center_cn
+        (waybillnum, destination_center_cn)
+        VALUES
+        <foreach collection="list" item="package" separator=",">
+            (#{package.wbn}, RTRIM(regexp_substr(#{package.cn},'[:ALNUM:]*[^\(]*')))
+        </foreach>
+    </insert>
+
+    <insert id="insertPackageDestinationCentreCity" parameterType="java.util.List">
+        INSERT INTO package_dest_center_city
+        (waybillnum, dest_center_city)
+        VALUES
+        <foreach collection="list" item="package" separator=",">
+            (#{package.wbn}, #{package.cnc})
+        </foreach>
+    </insert>
+
+    <select id="selectPackageDateTypes" resultType="java.util.Map">
+        select code, date_type from package_datetype
+    </select>
+
+</mapper>

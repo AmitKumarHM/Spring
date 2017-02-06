@@ -1,0 +1,53 @@
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
+		 http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	version="3.1">
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+
+	<display-name>sample.api.latest</display-name>
+	<description>Latest Sample API</description>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath*:applicationContext-database.xml</param-value>
+	</context-param>
+
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<!-- Servlet 2.4+ listener that exposes the request to the current thread, 
+		through both LocaleContextHolder and RequestContextHolder. To be registered 
+		as listener in web.xml. -->
+	<listener>
+		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+	</listener>
+
+	<!-- to keep track the total number of active sessions in a web application. 
+		If you want to keep monitor your sessions create and remove behavior then 
+		consider this listener -->
+	<listener>
+		<listener-class>com.quantifiedCare.webapp.listener.SessionTrackerListener</listener-class>
+	</listener>
+
+	<servlet>
+		<servlet-name>quantifiedCare</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath*:root-context.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>quantifiedCare</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
+
+</web-app>

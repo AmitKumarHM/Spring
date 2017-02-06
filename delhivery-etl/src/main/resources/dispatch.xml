@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="query">
+
+<insert id="insertDispatch" parameterType="java.util.Map">
+		INSERT INTO PUBLIC.DISPATCH
+			(
+			  dispatch_waybillnum,
+			  vehicle_id,
+			  drivername,
+			  vehicle_registration_number,
+			  origin_center,
+			  destination_center,
+			  cod_amount,
+			  prepaid_amount,
+			  pickup_amount,
+			  type,
+			  dim_booked_weight_kg,
+			  bagcount,
+			  remarks,
+			  dispatch_status,
+			  pod_status,
+			  dispatch_date,
+			  dispatch_datetime,
+			  complete_date,
+			  complete_datetime,
+			  creation_date,
+			  creation_datetime,
+			  updated_date,
+			  updated_datetime,
+			  <!-- last_updated_time, -->
+			  last_updated_by,
+			  dispatched_by_field_user,
+			  completed_by,
+			  field_username,
+			  field_user_employee_id,
+			  field_user_employee_type,
+			  field_user_user_id,
+			  field_user_imei_code,
+			  mileage,
+			  receipt_date,
+			  receipt_datetime,
+			  eod_expected_cod_amount,
+			  eod_pickedup_package_count,
+			  eod_collected_package_count,
+			  eod_cancelled_package_count,
+			  eod_pending_package_count,
+			  eod_returned_package_count,
+			  eod_delivered_package_count,
+			  eod_amount_collected, 
+			  eod_start_km, 
+			  eod_end_km,  
+			  mongo_id, 
+			  operation          
+			)
+			VALUES
+			(
+		      #{dispatch_waybillnum},
+			  #{vehicle_id},
+			  #{drivername},
+			  #{vehicle_registration_number},
+			  #{origin_center},
+			  #{destination_center},
+			  #{cod_amount},
+			  #{prepaid_amount},
+			  #{pickup_amount},
+			  #{type},
+			  #{dim_booked_weight_kg},
+			  #{bagcount},
+			  #{remarks},
+			  #{dispatch_status},
+			  #{pod_status},
+			  
+			  substring(#{dispatch_date},1,10),
+			 <!--  CONVERT(timestamp, #{dispatch_datetime}), -->
+			  CAST(#{dispatch_datetime} AS timestamp),
+			  
+			  substring(#{complete_date},1,10),
+			  CAST(#{complete_datetime} AS timestamp),
+			  <!-- CONVERT(timestamp, #{complete_datetime}), -->
+			  
+			  substring(#{creation_date},1,10),
+			  CAST(#{creation_datetime} AS timestamp),
+			 <!--  CONVERT(timestamp, #{creation_datetime}), -->
+			 
+			  substring(#{updated_date},1,10),
+			  CAST(#{updated_datetime} AS timestamp),
+			 <!--  CONVERT(timestamp, #{updated_datetime}), -->
+			  
+			  substring( #{receipt_date},1,10),
+			  CAST(#{receipt_datetime} AS timestamp),
+			  <!-- CAST(#{last_updated_time} AS timestamp), -->
+			  <!-- CONVERT(timestamp, #{receipt_datetime}),
+			  CONVERT(timestamp, #{last_updated_time}), -->
+			  
+			  #{last_updated_by},
+			  #{dispatched_by_field_user},
+			  #{completed_by},
+			  #{field_username},
+			  #{field_user_employee_id},
+			  #{field_user_employee_type},
+			  #{field_user_user_id},
+			  #{field_user_imei_code},
+			  #{mileage},
+			  
+			  #{eod_expected_cod_amount},
+			  #{eod_pickedup_package_count},
+			  #{eod_collected_package_count},
+			  #{eod_cancelled_package_count},
+			  #{eod_pending_package_count},
+			  #{eod_returned_package_count},
+			  #{eod_delivered_package_count},
+			  #{eod_amount_collected}, 
+			  #{eod_start_km}, 
+			  #{eod_end_km}, 
+			  #{mongo_id}, 
+			  #{operation}
+			<!-- #{mongo_id},
+			***************eod*****************
+			#{eod_returned_package_count},
+			#{eod_pickedup_package_count},
+			#{eod_collected_package_count},
+			#{eod_pending_package_count},
+			#{eod_cancelled_package_count},
+			#{eod_delivered_package_count},
+			#{eod_amount_collected},
+			#{eod_start_km},
+			#{eod_end_km},
+			#{eod_expected_cod_amount},
+			
+			#{origin_center},
+			#{mileage},
+			#{dim_booked_weight_kg},
+			#{field_user_imei_code},
+			
+			substring(#{receipt_date},1,10),
+			to_timestamp(#{receipt_date},'YYYY-MM-DDTHH:MI:SS.MS'),
+			CONVERT(timestamp, #{receipt_date}),
+			
+			#{dispatched_by_field_user},
+			#{bagcount},
+			
+			***************Amount***************************
+			#{cod_amount},
+			#{prepaid_amount},
+			#{pickup_amount},
+			***************Dispatch Details*****************
+			#{vehicle_registration_number},
+			#{dispatch_waybillnum},
+			#{completed_by},
+			#{remarks},
+			#{drivername},
+			#{destination_center},
+			***************Dates*****************
+			substring(#{complete_date},1,10),
+			to_timestamp(#{complete_datetime},'YYYY-MM-DDTHH:MI:SS.MS'),
+			CONVERT(timestamp, #{complete_datetime}),
+			
+			substring(#{dispatch_date},1,10),
+			to_timestamp(#{dispatch_datetime},'YYYY-MM-DDTHH:MI:SS.MS'),
+			CONVERT(timestamp, #{dispatch_datetime}),
+			
+			substring(#{update_date},1,10),
+			to_timestamp(#{update_datetime},'YYYY-MM-DDTHH:MI:SS.MS'),
+			CONVERT(timestamp, #{update_datetime}),	
+			#{vehicle_id}
+		 -->	
+			
+			)
+	</insert>
+	
+	<insert id="insertDispatchBag" parameterType="java.util.List">
+	        INSERT INTO PUBLIC.DISPATCH_BAG
+			(
+	         bag_seal_number,
+             dispatch_waybillnum, 
+			 operation
+	        )
+	        VALUES
+			<foreach collection="list" item="dispatchbag" separator=",">
+			(
+			 #{dispatchbag.bag_seal_number},
+             #{dispatchbag.dispatch_waybillnum},
+             #{dispatchbag.operation}
+			)
+			</foreach>
+	</insert>
+	
+	<insert id="insertDispatchPackage" parameterType="java.util.List">
+	        INSERT INTO PUBLIC.DISPATCH_PACKAGE
+			(
+			waybillnum,
+            dispatch_waybillnum, 
+			operation
+            )
+			VALUES
+			<foreach collection="list" item="dispatchpackage" separator=",">
+			(
+			#{dispatchpackage.waybillnum},
+            #{dispatchpackage.dispatch_waybillnum},
+            #{dispatchpackage.operation}
+			)
+			</foreach>
+	</insert>	
+
+    <insert id="insertDispatchPickUp" parameterType="java.util.List">
+	        INSERT INTO PUBLIC.DISPATCH_PICKUP_REQUESTS
+			(
+			 dispatch_waybillnum,
+             pickuprequest_id, 
+			 operation
+	        )
+			VALUES
+			<foreach collection="list" item="dispatchpickup" separator=",">
+			(
+			 #{dispatchpickup.dispatch_waybillnum},
+             #{dispatchpickup.pickuprequest_id},
+             #{dispatchpickup.operation}
+			)
+			</foreach>
+	</insert>	
+
+	<insert id="insertDispatchPodslips" parameterType="java.util.List">
+	        INSERT INTO PUBLIC.DISPATCH_PODSLIPS
+			(
+			dispatch_waybillnum,
+            upload_date,
+            upload_datetime,
+  			user_name,
+  			index_cnt, 
+			operation
+	        )
+			VALUES
+			<foreach collection="list" item="dispatchpodslips" separator=",">
+			(
+			#{dispatchpodslips.dispatch_waybillnum},
+  			#{dispatchpodslips.upload_date},
+  			to_timestamp(#{dispatchpodslips.upload_datetime},'YYYY-MM-DDTHH:MI:SS.MS'),
+  			#{dispatchpodslips.user_name},
+  			#{dispatchpodslips.index_cnt},
+  			#{dispatchpodslips.operation}
+			)
+			</foreach>
+	</insert>	
+	
+	<insert id="insertDispatchIncoming" parameterType="java.util.List">
+	        INSERT INTO PUBLIC.DISPATCH_INCOMING
+			(
+			dispatch_waybillnum,
+  			incoming_date,
+  			incoming_datetime,
+  			last_incoming_performed_by,
+  			remarks,
+  			otp,
+  			is_waybill_bag,
+  			incoming_type,
+  			identifier_value, 
+			operation
+	        )
+			VALUES
+			<foreach collection="list" item="dispatchIncoming" separator=",">
+			(
+			#{dispatchIncoming.dispatch_waybillnum},
+  			#{dispatchIncoming.incoming_date},
+  			to_timestamp(#{dispatchIncoming.incoming_datetime},'YYYY-MM-DDTHH:MI:SS.MS'),
+  			#{dispatchIncoming.last_incoming_performed_by},
+  			#{dispatchIncoming.remarks},
+  			#{dispatchIncoming.otp},
+  			#{dispatchIncoming.is_waybill_bag},
+  			#{dispatchIncoming.incoming_type},
+  			#{dispatchIncoming.identifier_value},
+  			#{dispatchIncoming.operation}
+			)
+			</foreach>
+	</insert>
+
+	<insert id="insertDispatchRoute" parameterType="java.util.List">
+	        INSERT INTO PUBLIC.DISPATCH_ROUTE
+			(
+			  dispatch_waybillnum ,
+			  longitude,
+			  latitude,
+			  accuracy,
+			  waybillnum,
+			  speed,
+			  route_date,
+			  route_datetime,
+			  index_cnt, 
+			  operation
+	        )
+			VALUES
+			<foreach collection="list" item="dispatchroute" separator=",">
+			(
+			  #{dispatchroute.dispatch_waybillnum},
+			  #{dispatchroute.longitude},
+			  #{dispatchroute.latitude},
+			  #{dispatchroute.accuracy},
+			  #{dispatchroute.waybillnum},
+			  #{dispatchroute.speed},
+			  #{dispatchroute.route_date},
+			  to_timestamp(#{dispatchroute.route_datetime},'YYYY-MM-DDTHH:MI:SS.MS'),
+			  #{dispatchroute.index_cnt},
+			  #{dispatchroute.operation}
+			)
+			</foreach>
+	</insert>
+
+
+	<insert id="insertDispatchType" parameterType="java.util.Map">
+	        INSERT INTO PUBLIC.DISPATCH_TYPES
+			(
+			code,
+            dispatch_type, 
+			operation
+	        )
+			VALUES
+			(
+			 #{code},
+             #{dispatch_type},
+             #{operation}
+			)
+	</insert>
+	
+	<insert id="insertDispatchCurrencyCount" parameterType="java.util.Map">
+	        INSERT INTO PUBLIC.DISPATCH_CURR_COUNT
+			(
+			 dispatch_waybillnum,
+			 dispatch_curr_count_thousand,
+			 dispatch_curr_count_five_hundred,
+			 dispatch_curr_count_hundred,
+			 dispatch_curr_count_fifty,
+			 dispatch_curr_count_twenty,
+			 dispatch_curr_count_ten,
+			 dispatch_curr_count_five,
+			 dispatch_curr_count_two,
+			 dispatch_curr_count_one, 
+			 operation
+			)
+			VALUES
+			(
+			 #{dispatch_waybillnum},
+			 #{dispatch_curr_count_thousand},
+			 #{dispatch_curr_count_five_hundred},
+			 #{dispatch_curr_count_hundred},
+			 #{dispatch_curr_count_fifty},
+			 #{dispatch_curr_count_twenty},
+			 #{dispatch_curr_count_ten},
+			 #{dispatch_curr_count_five},
+			 #{dispatch_curr_count_two},
+			 #{dispatch_curr_count_one},
+			 #{operation}
+			)
+	</insert>
+</mapper>

@@ -1,0 +1,2840 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="query">
+	<insert id="insertPackage" parameterType="java.util.List">
+		INSERT INTO PACKAGE
+		(waybillnum , order_id , client_name , pickup_types_code , dim_length , dim_width
+		, dim_height , dim_weight,
+		dim_volume , dim_manualweight , dim_updated_by , dim_updated_date ,
+		dim_updated_datetime , clientwarehouse_name,
+		zone, region, item_code , invoice_amount , cod_amount , lost_package ,
+		invoice_mode , last_updated_by ,
+		last_updatedon_date , last_updatedon_datetime , product_mode , product_type ,
+		pickupid , sku , product_details , product_client_hash ,
+		dim_weight_businessrule , dim_weight_historical ,
+		origin_center_oc , origin_center_city , destination_center_cn ,
+		parent_dispatch_center_dpc ,
+		dest_center_city , return_center , return_parent_center_rdpc , return_city , locked ,
+		created_date , created_datetime ,order_date , order_datetime
+		,pickup_ship_date , pickup_ship_datetime ,
+		incoming_verified_date , incoming_verified_datetime ,first_pending_date ,
+		first_pending_datetime ,
+		first_trial_date ,first_trial_datetime , last_dispatch_date , last_dispatch_datetime
+		,first_bagging_date ,
+		first_bagging_datetime ,returned_date , returned_datetime , first_dispatch_date ,
+		first_dispatch_datetime ,
+		expected_date , expected_datetime ,promised_date , promised_datetime ,
+		package_creation_date , package_creation_datetime
+		,package_manifest_date , package_manifest_datetime ,
+		package_pickup_at_clientwarehouse_date ,
+		package_pickup_at_clientwarehouse_datetime ,next_trial_date ,
+		next_trial_datetime ,
+		last_updated_date , last_updated_datetime ,last_scan_date , last_scan_datetime
+		,action_date , action_datetime ,
+		invoice_date , invoice_datetime ,remittance_date ,remittance_datetime ,
+		first_datetime_return_shipment_date , first_datetime_return_shipment
+		,first_pending_datetime_return_shipment_date
+		,first_pending_datetime_return_shipment ,
+		first_bagging_datetime_return_shipment_date ,
+		first_bagging_datetime_return_shipment
+		,first_dispatch_datetime_return_shipment_date
+		,first_dispatch_datetime_return_shipment ,
+		consignee_name , consignee_address_1 , consignee_address_2 ,
+		consignee_city , consignee_state , consignee_country , consignee_pincode ,
+		consignee_email , consignee_phone_1 ,
+		consignee_phone_2 , consignee_phone_3 , addr_segment_longitude , addr_segment_latitude
+		, addr_segment_pincode ,
+		addr_segment_mismatch , addr_segment_locality_id , addr_segment_locality_id_sub ,
+		addr_segment_locality_id_additional , mongo_id , last_updated_time )
+		VALUES
+		<foreach collection="list" item="package" separator=",">
+			(
+			<choose>
+				<when test="package.wbn != null">
+					#{package.wbn},
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.oid != null">
+					#{package.oid},
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.cl != null">
+					#{package.cl},
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.pt != null">
+					#{package.pt},
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.dws != null and package.dws.l != null">
+					#{package.dws.l},
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.dws != null and package.dws.b != null">
+					#{package.dws.b},
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.dws != null and package.dws.h != null">
+					#{package.dws.h},
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.dws != null and package.dws.wt != null">
+					#{package.dws.wt},
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.dws != null and package.dws.v != null">
+					#{package.dws.v},
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.dws != null and package.dws.mwt != null">
+					#{package.dws.mwt},
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.dws != null and package.dws.u != null">
+					#{package.dws.u},
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.dws != null and package.dws.ud != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{package.dws.ud.$date}/1000 * INTERVAL '1
+					Second '), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{package.dws.ud.$date}/1000 * INTERVAL '1 Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.pl != null">
+					#{package.pl},
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.zn != null">
+					#{package.zn},
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.rgn != null">
+					#{package.rgn},
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.itc != null">
+					#{package.itc},
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.rs != null">
+					#{package.rs},
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.cod != null">
+					#{package.cod},
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.lp != null">
+					#{package.lp},
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.md != null">
+					#{package.md},
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.u != null">
+					#{package.u},
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.dws != null and package.dws.ud != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{package.dws.ud.$date}/1000 * INTERVAL '1
+					Second '), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{package.dws.ud.$date}/1000 * INTERVAL '1 Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.pmode != null">
+					#{package.pmode},
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.ptype != null">
+					#{package.ptype},
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.pupid != null">
+					#{package.pupid},
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.sku != null">
+					#{package.sku},
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.prd != null">
+					#{package.prd},
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.pclh != null">
+					#{package.pclh},
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.bw != null">
+					#{package.bw},
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.gw != null">
+					#{package.gw},
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.oc != null">
+					#{package.oc},
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.occ != null">
+					#{package.occ},
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.cn != null">
+					#{package.cn},
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.dpc != null">
+					#{package.dpc},
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.cnc != null">
+					#{package.cnc},
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.rcn != null">
+					#{package.rcn},
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.rdpc != null">
+					#{package.rdpc},
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.rcty != null">
+					#{package.rcty},
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.lock != null">
+					#{package.lock},
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.cd != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{package.cd.$date}/1000 * INTERVAL '1
+					Second '), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{package.cd.$date}/1000 * INTERVAL '1 Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.od != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{package.od.$date}/1000 * INTERVAL '1
+					Second '), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{package.od.$date}/1000 * INTERVAL '1 Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.pd != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{package.pd.$date}/1000 * INTERVAL '1
+					Second '), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{package.pd.$date}/1000 * INTERVAL '1 Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.ivd != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{package.ivd.$date}/1000 * INTERVAL '1
+					Second '), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{package.ivd.$date}/1000 * INTERVAL '1 Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.fpd != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{package.fpd.$date}/1000 * INTERVAL '1
+					Second '), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{package.fpd.$date}/1000 * INTERVAL '1 Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.ftd != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{package.ftd.$date}/1000 * INTERVAL '1
+					Second '), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{package.ftd.$date}/1000 * INTERVAL '1 Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.ldd != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{package.ldd.$date}/1000 * INTERVAL '1
+					Second '), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{package.ldd.$date}/1000 * INTERVAL '1 Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.fbd != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{package.fbd.$date}/1000 * INTERVAL '1
+					Second '), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{package.fbd.$date}/1000 * INTERVAL '1 Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.rd != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{package.rd.$date}/1000 * INTERVAL '1
+					Second '), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{package.rd.$date}/1000 * INTERVAL '1 Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.fdd != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{package.fdd.$date}/1000 * INTERVAL '1
+					Second '), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{package.fdd.$date}/1000 * INTERVAL '1 Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.ed != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{package.ed.$date}/1000 * INTERVAL '1
+					Second '), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{package.ed.$date}/1000 * INTERVAL '1 Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.pdd != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{package.pdd.$date}/1000 * INTERVAL '1
+					Second '), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{package.pdd.$date}/1000 * INTERVAL '1 Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.cd != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{package.cd.$date}/1000 * INTERVAL '1
+					Second '), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{package.cd.$date}/1000 * INTERVAL '1 Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.mnd != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{package.mnd.$date}/1000 * INTERVAL '1
+					Second '), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{package.mnd.$date}/1000 * INTERVAL '1 Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.cpd != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{package.cpd.$date}/1000 * INTERVAL '1
+					Second '), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{package.cpd.$date}/1000 * INTERVAL '1 Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.ntd != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{package.ntd.$date}/1000 * INTERVAL '1
+					Second '), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{package.ntd.$date}/1000 * INTERVAL '1 Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.lu != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{package.lu.$date}/1000 * INTERVAL '1
+					Second '), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{package.lu.$date}/1000 * INTERVAL '1 Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.lsd != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{package.lsd.$date}/1000 * INTERVAL '1
+					Second '), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{package.lsd.$date}/1000 * INTERVAL '1 Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.adt != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{package.adt.$date}/1000 * INTERVAL '1
+					Second '), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{package.adt.$date}/1000 * INTERVAL '1 Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.inv != null and package.inv.dt != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{package.inv.dt.$date}/1000 * INTERVAL '1
+					Second '), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{package.inv.dt.$date}/1000 * INTERVAL '1 Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.inv != null and package.inv.rdt != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{package.inv.rdt.$date}/1000 * INTERVAL '1
+					Second '), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{package.inv.rdt.$date}/1000 * INTERVAL '1 Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.frd != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{package.frd.$date}/1000 * INTERVAL '1
+					Second '), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{package.frd.$date}/1000 * INTERVAL '1 Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.frpd != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{package.frpd.$date}/1000 * INTERVAL '1
+					Second '), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{package.frpd.$date}/1000 * INTERVAL '1 Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.frbd != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{package.frbd.$date}/1000 * INTERVAL '1
+					Second '), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{package.frbd.$date}/1000 * INTERVAL '1 Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.frdd != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{package.frdd.$date}/1000 * INTERVAL '1
+					Second '), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{package.frdd.$date}/1000 * INTERVAL '1 Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.nm != null">
+					#{package.nm},
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.add_1 != null">
+					#{package.oc},
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.add_2 != null">
+					#{package.oc},
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.cty != null">
+					#{package.cty},
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.st != null">
+					#{package.st},
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.cnt != null">
+					#{package.cnt},
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.pin != null">
+					#{package.pin},
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.em != null">
+					#{package.em},
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.ph_1 != null">
+					#{package.ph_1},
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.ph_2 != null">
+					#{package.ph_2},
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.ph_3 != null">
+					#{package.ph_3},
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.aseg != null and package.aseg.lon != null">
+					#{package.aseg.lon},
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.aseg != null and package.aseg.lat != null">
+					#{package.aseg.lat},
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.aseg != null and package.aseg.pin != null">
+					#{package.aseg.pin},
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.aseg != null and package.aseg.mismatch != null">
+					#{package.aseg.mismatch},
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.aseg != null and package.aseg.loc != null">
+					#{package.aseg.loc},
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.aseg != null and package.aseg.sloc != null">
+					#{package.aseg.sloc},
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package.aseg != null and package.aseg.aloc != null">
+					#{package.aseg.aloc},
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="package._id != null and package._id.$oid != null">
+					#{package._id.$oid},
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			SYSDATE)
+		</foreach>
+	</insert>
+	<insert id="insertScanFact" parameterType="java.util.List">
+		INSERT INTO SCAN_FACTS
+		(client_name , waybillnum , zone , region , package_pickup_types_code ,
+		origin_center , destination_center ,
+		origin_center_city , dest_center_city , consignee_pincode , lost_package , created_date
+		,
+		created_datetime ,order_date , order_datetime ,package_pickup_date ,
+		package_pickup_datetime ,
+		incoming_verified_date , incoming_verified_datetime ,first_pending_date ,
+		first_pending_datetime ,
+		first_trial_date ,first_trial_datetime , last_dispatch_date , last_dispatch_datetime
+		,first_bagging_date ,
+		first_bagging_datetime ,returned_date , returned_datetime , first_dispatch_date ,
+		first_dispatch_datetime ,
+		expected_date , expected_datetime ,promised_date , promised_datetime ,
+		package_creation_date , package_creation_datetime
+		,package_manifest_date , package_manifest_datetime ,
+		package_pickup_at_clientwarehouse_date ,
+		package_pickup_at_clientwarehouse_datetime ,next_trial_date ,
+		next_trial_datetime ,
+		last_updated_date , last_updated_datetime ,last_scan_date , last_scan_datetime
+		,action_date , action_datetime ,
+		invoice_date , invoice_datetime ,remittance_date ,remittance_datetime ,
+		first_datetime_return_shipment_date , first_datetime_return_shipment
+		,first_pending_datetime_return_shipment_date
+		,first_pending_datetime_return_shipment ,
+		first_bagging_datetime_return_shipment_date ,
+		first_bagging_datetime_return_shipment
+		,first_dispatch_datetime_return_shipment_date
+		,first_dispatch_datetime_return_shipment ,
+		action_code , nsl_code , status_code , status_type , scan_location_center ,
+		pid_number , ps_number ,
+		dispatch_waybillnum_dwbn , connection ,
+		scanned_date , scanned_datetime , updated_date , updated_datetime ,
+		updated_by , scan_location_hub , scan_location_dc , scan_location_pc ,
+		scan_location_dpc , scan_location_cc ,
+		scan_destination_center , field_user_user_id , vehicle_registration_number , pickupid ,
+		parent_bag_seal_pbs ,
+		istsc_coloaders , istsc_vehicle_registration_number , derived_scan_type,
+		time_in_system ,
+		time_since_last_scan , time_spent_in_facility , time_on_road , pickup_manifestreceived ,
+		pickup_clientpickup ,
+		incomingverified_pickup , firstbagging_incomingverified , pcout_firstbagging ,
+		originhubin_pcout ,
+		originhubout_originhubin , desthubin_originhubout , desthubout_desthubin , dpcin_desthubout ,
+		dpcout_dpcin ,
+		firstpending_dpcout , firstdispatch_firstpending , lastdispatch_firstdispatch ,
+		firstreturn_pickup ,
+		firstbaggingforreturn_firstreturn , firstpendingforreturn_firstdispatchforreturn , promised_pickup ,
+		firstdispatch_pickup , firstdispatch_incomingverified ,
+		now_currentscanned , currentscanned_pickup , now_pickup
+		, last_updated_time, is_current, returns_pickedup_date,
+		returns_pickedup_datetime, returns_closed_date,
+		returns_closed_datetime, returns_closure_time)
+		VALUES
+		<foreach collection="list" item="scan" separator=",">
+			(
+			<choose>
+				<when test="scan.cl != null">
+					#{scan.cl} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.wbn != null">
+					#{scan.wbn} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.zn != null">
+					#{scan.zn} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.rgn != null">
+					#{scan.rgn} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.pt != null">
+					#{scan.pt} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.oc != null">
+					#{scan.oc} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.cn != null">
+					#{scan.cn} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.occ != null">
+					#{scan.occ} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.cnc != null">
+					#{scan.cnc} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.pin != null">
+					#{scan.pin} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.lp != null">
+					#{scan.lp} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.cd != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{scan.cd.$date}/1000 * INTERVAL '1 Second
+					'), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{scan.cd.$date}/1000 * INTERVAL '1 Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.od != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{scan.od.$date}/1000 * INTERVAL '1 Second
+					'), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{scan.od.$date}/1000 * INTERVAL '1 Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.pd != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{scan.pd.$date}/1000 * INTERVAL '1 Second
+					'), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{scan.pd.$date}/1000 * INTERVAL '1 Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.ivd != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{scan.ivd.$date}/1000 * INTERVAL '1 Second
+					'), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{scan.ivd.$date}/1000 * INTERVAL '1 Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.fpd != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{scan.fpd.$date}/1000 * INTERVAL '1 Second
+					'), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{scan.fpd.$date}/1000 * INTERVAL '1 Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.ftd != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{scan.ftd.$date}/1000 * INTERVAL '1 Second
+					'), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{scan.ftd.$date}/1000 * INTERVAL '1 Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.ldd != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{scan.ldd.$date}/1000 * INTERVAL '1 Second
+					'), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{scan.ldd.$date}/1000 * INTERVAL '1 Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.fbd != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{scan.fbd.$date}/1000 * INTERVAL '1 Second
+					'), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{scan.fbd.$date}/1000 * INTERVAL '1 Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.rd != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{scan.rd.$date}/1000 * INTERVAL '1 Second
+					'), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{scan.rd.$date}/1000 * INTERVAL '1 Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.fdd != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{scan.fdd.$date}/1000 * INTERVAL '1 Second
+					'), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{scan.fdd.$date}/1000 * INTERVAL '1 Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.ed != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{scan.ed.$date}/1000 * INTERVAL '1 Second
+					'), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{scan.ed.$date}/1000 * INTERVAL '1 Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.pdd != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{scan.pdd.$date}/1000 * INTERVAL '1 Second
+					'), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{scan.pdd.$date}/1000 * INTERVAL '1 Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.cd != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{scan.cd.$date}/1000 * INTERVAL '1 Second
+					'), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{scan.cd.$date}/1000 * INTERVAL '1 Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.mnd != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{scan.mnd.$date}/1000 * INTERVAL '1 Second
+					'), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{scan.mnd.$date}/1000 * INTERVAL '1 Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.cpd != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{scan.cpd.$date}/1000 * INTERVAL '1 Second
+					'), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{scan.cpd.$date}/1000 * INTERVAL '1 Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.ntd != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{scan.ntd.$date}/1000 * INTERVAL '1 Second
+					'), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{scan.ntd.$date}/1000 * INTERVAL '1 Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.lu != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{scan.lu.$date}/1000 * INTERVAL '1 Second
+					'), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{scan.lu.$date}/1000 * INTERVAL '1 Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.lsd != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{scan.lsd.$date}/1000 * INTERVAL '1 Second
+					'), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{scan.lsd.$date}/1000 * INTERVAL '1 Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.adt != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{scan.adt.$date}/1000 * INTERVAL '1 Second
+					'), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{scan.adt.$date}/1000 * INTERVAL '1 Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.idt != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{scan.idt.$date}/1000 * INTERVAL '1 Second
+					'), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{scan.idt.$date}/1000 * INTERVAL '1 Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.rdt != null ">
+					TO_DATE ((TIMESTAMP 'epoch' + #{scan.rdt.$date}/1000 * INTERVAL '1 Second
+					'), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{scan.rdt.$date}/1000 * INTERVAL '1 Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.frd != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{scan.frd.$date}/1000 * INTERVAL '1 Second
+					'), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{scan.frd.$date}/1000 * INTERVAL '1 Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.frpd != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{scan.frpd.$date}/1000 * INTERVAL '1 Second
+					'), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{scan.frpd.$date}/1000 * INTERVAL '1 Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.frbd != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{scan.frbd.$date}/1000 * INTERVAL '1 Second
+					'), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{scan.frbd.$date}/1000 * INTERVAL '1 Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.frdd != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{scan.frdd.$date}/1000 * INTERVAL '1 Second
+					'), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{scan.frdd.$date}/1000 * INTERVAL '1 Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.act != null">
+					#{scan.act} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.nsl != null">
+					#{scan.nsl} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.ss != null">
+					#{scan.ss} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.st != null">
+					#{scan.st} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.sl != null">
+					#{scan.sl} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.pid != null">
+					#{scan.pid} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.ps != null">
+					#{scan.ps} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.dwbn != null">
+					#{scan.dwbn} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.cid != null">
+					#{scan.cid} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.sd != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{scan.sd.$date}/1000 * INTERVAL '1 Second
+					'), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{scan.sd.$date}/1000 * INTERVAL '1 Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.dws != null and scan.dws.ud != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{scan.dws.ud.$date}/1000 * INTERVAL '1
+					Second '), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{scan.dws.ud.$date}/1000 * INTERVAL '1 Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.u != null">
+					#{scan.u} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.scan_location_hub != null">
+					#{scan.scan_location_hub} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.scan_location_dc != null">
+					#{scan.scan_location_dc} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.scan_location_pc != null">
+					#{scan.scan_location_pc} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.scan_location_dpc != null">
+					#{scan.scan_location_dpc} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.scan_location_cc != null">
+					#{scan.scan_location_cc} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.dest != null">
+					#{scan.dest} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.field_user_user_id != null">
+					#{scan.field_user_user_id} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.vehicle_registration_number != null">
+					#{scan.vehicle_registration_number} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.pupid != null">
+					#{scan.pupid} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.s != null and scan.s.pbs != null">
+					#{scan.s.pbs} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.cld != null">
+					#{scan.cld} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.vh != null">
+					#{scan.vh} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.derived_scan_type != null">
+					#{scan.derived_scan_type} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.time_in_system != null">
+					#{scan.time_in_system} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.time_since_last_scan != null">
+					#{scan.time_since_last_scan} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.time_spent_in_facility != null">
+					#{scan.time_spent_in_facility} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.time_on_road != null">
+					#{scan.time_on_road} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.pickup_manifestreceived != null">
+					#{scan.pickup_manifestreceived} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.pickup_clientpickup != null">
+					#{scan.pickup_clientpickup} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.incomingverified_pickup != null">
+					#{scan.incomingverified_pickup} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.firstbagging_incomingverified != null">
+					#{scan.firstbagging_incomingverified} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.pcout_firstbagging != null">
+					#{scan.pcout_firstbagging} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.originhubin_pcout != null">
+					#{scan.originhubin_pcout} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.originhubout_originhubin != null">
+					#{scan.originhubout_originhubin} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.desthubin_originhubout != null">
+					#{scan.desthubin_originhubout} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.desthubout_desthubin != null">
+					#{scan.desthubout_desthubin} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.dpcin_desthubout != null">
+					#{scan.dpcin_desthubout} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.dpcout_dpcin != null">
+					#{scan.dpcout_dpcin} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.firstpending_dpcout != null">
+					#{scan.firstpending_dpcout} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.firstdispatch_firstpending != null">
+					#{scan.firstdispatch_firstpending} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.lastdispatch_firstdispatch != null">
+					#{scan.lastdispatch_firstdispatch} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.firstreturn_pickup != null">
+					#{scan.firstreturn_pickup} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.firstbaggingforreturn_firstreturn != null">
+					#{scan.firstbaggingforreturn_firstreturn} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.firstpendingforreturn_firstdispatchforreturn != null">
+					#{scan.firstpendingforreturn_firstdispatchforreturn} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.promised_pickup != null">
+					#{scan.promised_pickup} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.firstdispatch_pickup != null">
+					#{scan.firstdispatch_pickup} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.firstdispatch_incomingverified != null">
+					#{scan.firstdispatch_incomingverified} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.now_currentscanned != null">
+					#{scan.now_currentscanned} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.currentscanned_pickup != null">
+					#{scan.currentscanned_pickup} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.now_pickup != null">
+					#{scan.now_pickup} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			SYSDATE, #{scan.is_current},
+			<choose>
+				<when test="scan.returns_pickedup_date != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{scan.returns_pickedup_date.$date}/1000 *
+					INTERVAL '1 Second '), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{scan.returns_pickedup_date.$date}/1000 * INTERVAL '1
+					Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.returns_closed_date != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{scan.returns_closed_date.$date}/1000 *
+					INTERVAL '1 Second '), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{scan.returns_closed_date.$date}/1000 * INTERVAL '1
+					Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.returns_closure_time != null">
+					#{scan.returns_closure_time}
+				</when>
+				<otherwise>
+					null
+				</otherwise>
+			</choose>
+			)
+		</foreach>
+	</insert>
+
+
+	<insert id="updateInsertScanFact" parameterType="java.util.List">
+		INSERT INTO SCAN_FACTS
+		(client_name , waybillnum , zone , region , package_pickup_types_code ,
+		origin_center , destination_center ,
+		origin_center_city , dest_center_city , consignee_pincode , lost_package , created_date
+		,
+		created_datetime ,order_date , order_datetime ,package_pickup_date ,
+		package_pickup_datetime ,
+		incoming_verified_date , incoming_verified_datetime ,first_pending_date ,
+		first_pending_datetime ,
+		first_trial_date ,first_trial_datetime , last_dispatch_date , last_dispatch_datetime
+		,first_bagging_date ,
+		first_bagging_datetime ,returned_date , returned_datetime , first_dispatch_date ,
+		first_dispatch_datetime ,
+		expected_date , expected_datetime ,promised_date , promised_datetime ,
+		package_creation_date , package_creation_datetime
+		,package_manifest_date , package_manifest_datetime ,
+		package_pickup_at_clientwarehouse_date ,
+		package_pickup_at_clientwarehouse_datetime ,next_trial_date ,
+		next_trial_datetime ,
+		last_updated_date , last_updated_datetime ,last_scan_date , last_scan_datetime
+		,action_date , action_datetime ,
+		invoice_date , invoice_datetime ,remittance_date ,remittance_datetime ,
+		first_datetime_return_shipment_date , first_datetime_return_shipment
+		,first_pending_datetime_return_shipment_date
+		,first_pending_datetime_return_shipment ,
+		first_bagging_datetime_return_shipment_date ,
+		first_bagging_datetime_return_shipment
+		,first_dispatch_datetime_return_shipment_date
+		,first_dispatch_datetime_return_shipment ,
+		action_code , nsl_code , status_code , status_type , scan_location_center ,
+		pid_number , ps_number ,
+		dispatch_waybillnum_dwbn , connection ,
+		scanned_date , scanned_datetime , updated_date , updated_datetime ,
+		updated_by , scan_location_hub , scan_location_dc , scan_location_pc ,
+		scan_location_dpc , scan_location_cc ,
+		scan_destination_center , field_user_user_id , vehicle_registration_number , pickupid ,
+		parent_bag_seal_pbs ,
+		istsc_coloaders , istsc_vehicle_registration_number , derived_scan_type,
+		time_in_system ,
+		time_since_last_scan , time_spent_in_facility , time_on_road , pickup_manifestreceived ,
+		pickup_clientpickup ,
+		incomingverified_pickup , firstbagging_incomingverified , pcout_firstbagging ,
+		originhubin_pcout ,
+		originhubout_originhubin , desthubin_originhubout , desthubout_desthubin , dpcin_desthubout ,
+		dpcout_dpcin ,
+		firstpending_dpcout , firstdispatch_firstpending , lastdispatch_firstdispatch ,
+		firstreturn_pickup ,
+		firstbaggingforreturn_firstreturn , firstpendingforreturn_firstdispatchforreturn , promised_pickup ,
+		firstdispatch_pickup , firstdispatch_incomingverified ,
+		now_currentscanned , currentscanned_pickup , now_pickup
+		, last_updated_time, is_current, returns_pickedup_date,
+		returns_pickedup_datetime, returns_closed_date,
+		returns_closed_datetime, returns_closure_time)
+		VALUES
+		<foreach collection="list" item="scan" separator=",">
+			(
+			<choose>
+				<when test="scan.cl != null">
+					#{scan.cl} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.wbn != null">
+					#{scan.wbn} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.zn != null">
+					#{scan.zn} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.rgn != null">
+					#{scan.rgn} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.pt != null">
+					#{scan.pt} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.oc != null">
+					#{scan.oc} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.cn != null">
+					#{scan.cn} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.occ != null">
+					#{scan.occ} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.cnc != null">
+					#{scan.cnc} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.pin != null">
+					#{scan.pin} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.lp != null">
+					#{scan.lp} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.cd != null">
+					#{scan.cd},
+					#{scan.cd_time},
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.od != null">
+					#{scan.od},
+					#{scan.od_time},
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.pd != null">
+					#{scan.pd},
+					#{scan.pd_time},
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.ivd != null">
+					#{scan.ivd},
+					#{scan.ivd_time},
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.fpd != null">
+					#{scan.fpd},
+					#{scan.fpd_time},
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.ftd != null">
+					#{scan.ftd},
+					#{scan.ftd_time},
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.ldd != null">
+					#{scan.ldd},
+					#{scan.ldd_time},
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.fbd != null">
+					#{scan.fbd},
+					#{scan.fbd_time},
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.rd != null">
+					#{scan.rd},
+					#{scan.rd_time},
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.fdd != null">
+					#{scan.fdd},
+					#{scan.fdd_time},
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.ed != null">
+					#{scan.ed},
+					#{scan.ed_time},
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.pdd != null">
+					#{scan.pdd},
+					#{scan.pdd_time},
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.cd != null">
+					#{scan.cd},
+					#{scan.cd_time},
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.mnd != null">
+					#{scan.mnd},
+					#{scan.mnd_time},
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.cpd != null">
+					#{scan.cpd},
+					#{scan.cpd_time},
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.ntd != null">
+					#{scan.ntd},
+					#{scan.ntd_time},
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.lu != null">
+					#{scan.lu},
+					#{scan.lu_time},
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.lsd != null">
+					#{scan.lsd},
+					#{scan.lsd_time},
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.adt != null">
+					#{scan.adt},
+					#{scan.adt_time},
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.idt != null">
+					#{scan.idt},
+					#{scan.idt_time},
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.rdt != null ">
+					#{scan.rdt},
+					#{scan.rdt_time},
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.frd != null">
+					#{scan.frd},
+					#{scan.frd_time},
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.frpd != null">
+					#{scan.frpd},
+					#{scan.frpd_time},
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.frbd != null">
+					#{scan.frbd},
+					#{scan.frbd_time},
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.frdd != null">
+					#{scan.frdd},
+					#{scan.frdd_time},
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.act != null">
+					#{scan.act} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.nsl != null">
+					#{scan.nsl} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.ss != null">
+					#{scan.ss} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.st != null">
+					#{scan.st} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.sl != null">
+					#{scan.sl} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.pid != null">
+					#{scan.pid} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.ps != null">
+					#{scan.ps} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.dwbn != null">
+					#{scan.dwbn} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.cid != null">
+					#{scan.cid} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.sd != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{scan.sd.$date}/1000 * INTERVAL '1 Second
+					'), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{scan.sd.$date}/1000 * INTERVAL '1 Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.dws != null and scan.dws.ud != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{scan.dws.ud.$date}/1000 * INTERVAL '1
+					Second '), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{scan.dws.ud.$date}/1000 * INTERVAL '1 Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.u != null">
+					#{scan.u} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.scan_location_hub != null">
+					#{scan.scan_location_hub} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.scan_location_dc != null">
+					#{scan.scan_location_dc} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.scan_location_pc != null">
+					#{scan.scan_location_pc} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.scan_location_dpc != null">
+					#{scan.scan_location_dpc} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.scan_location_cc != null">
+					#{scan.scan_location_cc} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.dest != null">
+					#{scan.dest} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.field_user_user_id != null">
+					#{scan.field_user_user_id} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.vehicle_registration_number != null">
+					#{scan.vehicle_registration_number} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.pupid != null">
+					#{scan.pupid} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.s != null and scan.s.pbs != null">
+					#{scan.s.pbs} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.cld != null">
+					#{scan.cld} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.vh != null">
+					#{scan.vh} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.derived_scan_type != null">
+					#{scan.derived_scan_type} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.time_in_system != null">
+					#{scan.time_in_system} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.time_since_last_scan != null">
+					#{scan.time_since_last_scan} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.time_spent_in_facility != null">
+					#{scan.time_spent_in_facility} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.time_on_road != null">
+					#{scan.time_on_road} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.pickup_manifestreceived != null">
+					#{scan.pickup_manifestreceived} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.pickup_clientpickup != null">
+					#{scan.pickup_clientpickup} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.incomingverified_pickup != null">
+					#{scan.incomingverified_pickup} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.firstbagging_incomingverified != null">
+					#{scan.firstbagging_incomingverified} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.pcout_firstbagging != null">
+					#{scan.pcout_firstbagging} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.originhubin_pcout != null">
+					#{scan.originhubin_pcout} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.originhubout_originhubin != null">
+					#{scan.originhubout_originhubin} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.desthubin_originhubout != null">
+					#{scan.desthubin_originhubout} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.desthubout_desthubin != null">
+					#{scan.desthubout_desthubin} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.dpcin_desthubout != null">
+					#{scan.dpcin_desthubout} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.dpcout_dpcin != null">
+					#{scan.dpcout_dpcin} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.firstpending_dpcout != null">
+					#{scan.firstpending_dpcout} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.firstdispatch_firstpending != null">
+					#{scan.firstdispatch_firstpending} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.lastdispatch_firstdispatch != null">
+					#{scan.lastdispatch_firstdispatch} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.firstreturn_pickup != null">
+					#{scan.firstreturn_pickup} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.firstbaggingforreturn_firstreturn != null">
+					#{scan.firstbaggingforreturn_firstreturn} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.firstpendingforreturn_firstdispatchforreturn != null">
+					#{scan.firstpendingforreturn_firstdispatchforreturn} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.promised_pickup != null">
+					#{scan.promised_pickup} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.firstdispatch_pickup != null">
+					#{scan.firstdispatch_pickup} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.firstdispatch_incomingverified != null">
+					#{scan.firstdispatch_incomingverified} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.now_currentscanned != null">
+					#{scan.now_currentscanned} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.currentscanned_pickup != null">
+					#{scan.currentscanned_pickup} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+
+			<choose>
+				<when test="scan.now_pickup != null">
+					#{scan.now_pickup} ,
+				</when>
+				<otherwise>
+					null,
+				</otherwise>
+			</choose>
+			SYSDATE, #{scan.is_current},
+			<choose>
+				<when test="scan.returns_pickedup_date != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{scan.returns_pickedup_date.$date}/1000 *
+					INTERVAL '1 Second '), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{scan.returns_pickedup_date.$date}/1000 * INTERVAL '1
+					Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.returns_closed_date != null">
+					TO_DATE ((TIMESTAMP 'epoch' + #{scan.returns_closed_date.$date}/1000 *
+					INTERVAL '1 Second '), 'YYYY-MM-DD'),
+					(TIMESTAMP 'epoch' + #{scan.returns_closed_date.$date}/1000 * INTERVAL '1
+					Second '),
+				</when>
+				<otherwise>
+					null,null,
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="scan.returns_closure_time != null">
+					#{scan.returns_closure_time}
+				</when>
+				<otherwise>
+					null
+				</otherwise>
+			</choose>
+			)
+		</foreach>
+	</insert>
+
+	<update id="updatePackage" parameterType="java.util.List">
+		<foreach collection="list" separator=";" item="package">
+			update PACKAGE
+			<set>
+				<if test="package.wbn != null">waybillnum=#{package.wbn},</if>
+				<if test="package.oid != null">order_id=#{package.oid},</if>
+				<if test="package.cl != null">client_name=#{package.cl},</if>
+				<if test="package.pt != null">pickup_types_code=#{package.pt},</if>
+				<if test="package.dws !=null and package.dws.l != null">dim_length=#{package.dws.l},</if>
+				<if test="package.dws !=null and package.dws.b != null">dim_width=#{package.dws.b},</if>
+				<if test="package.dws !=null and package.dws.h != null">dim_height=#{package.dws.h},</if>
+				<if test="package.dws !=null and package.dws.wt != null">dim_weight=#{package.dws.wt},</if>
+				<if test="package.dws !=null and package.dws.v != null">dim_volume=#{package.dws.v},</if>
+				<if test="package.dws !=null and package.dws.mwt != null">dim_manualweight=#{package.dws.mwt},</if>
+				<if test="package.dws !=null and package.dws.u != null">dim_updated_by=#{package.dws.u},</if>
+				<if test="package.dws !=null and package.dws.ud != null">dim_updated_date=TO_DATE (#{package.dws.ud.$date},
+					'YYYY-MM-DD'),</if>
+				<if test="package.dws !=null and package.dws.ud != null">dim_updated_datetime=#{package.dws.ud.$date}),</if>
+				<if test="package.pl != null">clientwarehouse_name=#{package.pl},</if>
+				<if test="package.zn != null">zone=#{package.zn},</if>
+				<if test="package.rgn != null">region=#{package.rgn},</if>
+				<if test="package.itc != null">item_code=#{package.itc},</if>
+				<if test="package.rs != null">invoice_amount= #{package.rs},</if>
+				<if test="package.cod != null">cod_amount=#{package.cod},</if>
+				<if test="package.lp != null">lost_package=#{package.lp},</if>
+				<if test="package.md != null">invoice_mode=#{package.md},</if>
+				<if test="package.u != null">last_updated_by=#{package.u},</if>
+				<if test="package.dws !=null and package.dws.ud != null">last_updatedon_date=TO_DATE ((TIMESTAMP 'epoch' +
+					#{package.dws.ud.$date}/1000 * INTERVAL '1 Second '),
+					'YYYY-MM-DD'),
+				</if>
+				<if test="package.dws !=null and package.dws.ud != null">last_updatedon_datetime=(TIMESTAMP 'epoch' +
+					#{package.dws.ud.$date}/1000 *
+					INTERVAL '1 Second '),
+				</if>
+				<if test="package.pmode != null">product_mode=#{package.pmode},</if>
+				<if test="package.ptype != null">product_type=#{package.ptype},</if>
+				<if test="package.pupid != null">pickupid=#{package.pupid},</if>
+				<if test="package.sku != null">sku=#{package.sku},</if>
+				<if test="package.prd != null">product_details=#{package.prd},</if>
+				<if test="package.pclh != null">product_client_hash=#{package.pclh},</if>
+				<if test="package.bw != null">dim_weight_businessrule=#{package.bw},</if>
+				<if test="package.gw != null">dim_weight_historical=#{package.gw},</if>
+				<if test="package.oc != null">origin_center_oc=#{package.oc},</if>
+				<if test="package.occ != null">origin_center_city=#{package.occ},</if>
+				<if test="package.cn != null">destination_center_cn=#{package.cn},</if>
+				<if test="package.dpc != null">parent_dispatch_center_dpc=#{package.dpc},</if>
+				<if test="package.cnc != null">dest_center_city=#{package.cnc},</if>
+				<if test="package.rcn != null">return_center=#{package.rcn},</if>
+				<if test="package.rdpc != null">return_parent_center_rdpc=#{package.rdpc},</if>
+				<if test="package.rcty != null">return_city=#{package.rcty},</if>
+				<if test="package.lock != null">locked=#{package.lock},</if>
+				<if test="package.cd != null">created_date=TO_DATE ((TIMESTAMP 'epoch' +
+					#{package.cd.$date}/1000 * INTERVAL '1 Second '),
+					'YYYY-MM-DD'),
+				</if>
+				<if test="package.od != null">order_date=TO_DATE ((TIMESTAMP 'epoch' +
+					#{package.od.$date}/1000 * INTERVAL '1 Second '),
+					'YYYY-MM-DD'),
+				</if>
+				<if test="package.pd != null">pickup_ship_date=TO_DATE ((TIMESTAMP 'epoch' +
+					#{package.pd.$date}/1000 * INTERVAL '1 Second
+					'), 'YYYY-MM-DD'),
+				</if>
+				<if test="package.ivd != null">incoming_verified_date=TO_DATE ((TIMESTAMP 'epoch' +
+					#{package.ivd.$date}/1000 * INTERVAL '1
+					Second '), 'YYYY-MM-DD'),
+				</if>
+				<if test="package.fpd != null">first_pending_date=TO_DATE ((TIMESTAMP 'epoch' +
+					#{package.fpd.$date}/1000 * INTERVAL '1
+					Second '), 'YYYY-MM-DD'),
+				</if>
+				<if test="package.ftd != null">first_trial_date=TO_DATE ((TIMESTAMP 'epoch' +
+					#{package.ftd.$date}/1000 * INTERVAL '1 Second
+					'), 'YYYY-MM-DD'),
+				</if>
+				<if test="package.ldd != null">last_dispatch_date=TO_DATE ((TIMESTAMP 'epoch' +
+					#{package.ldd.$date}/1000 * INTERVAL '1
+					Second '), 'YYYY-MM-DD'),
+				</if>
+				<if test="package.fbd != null">first_bagging_date=TO_DATE ((TIMESTAMP 'epoch' +
+					#{package.fbd.$date}/1000 * INTERVAL '1
+					Second '), 'YYYY-MM-DD'),
+				</if>
+				<if test="package.rd != null">returned_date=TO_DATE ((TIMESTAMP 'epoch' +
+					#{package.rd.$date}/1000 * INTERVAL '1 Second '),
+					'YYYY-MM-DD'),
+				</if>
+				<if test="package.fdd != null">first_dispatch_date=TO_DATE ((TIMESTAMP 'epoch' +
+					#{package.fdd.$date}/1000 * INTERVAL '1
+					Second '), 'YYYY-MM-DD'),
+				</if>
+				<if test="package.ed != null">expected_date=TO_DATE ((TIMESTAMP 'epoch' +
+					#{package.ed.$date}/1000 * INTERVAL '1 Second '),
+					'YYYY-MM-DD'),
+				</if>
+				<if test="package.pdd != null">promised_date=TO_DATE ((TIMESTAMP 'epoch' +
+					#{package.pdd.$date}/1000 * INTERVAL '1 Second
+					'), 'YYYY-MM-DD'),
+				</if>
+				<if test="package.cd != null">package_creation_date=TO_DATE ((TIMESTAMP 'epoch' +
+					#{package.cd.$date}/1000 * INTERVAL '1
+					Second '), 'YYYY-MM-DD'),
+				</if>
+				<if test="package.mnd != null">package_manifest_date=TO_DATE ((TIMESTAMP 'epoch' +
+					#{package.mnd.$date}/1000 * INTERVAL '1
+					Second '), 'YYYY-MM-DD'),
+				</if>
+				<if test="package.cpd != null">package_pickup_at_clientwarehouse_date=TO_DATE
+					((TIMESTAMP 'epoch' +
+					#{package.cpd.$date}/1000 * INTERVAL '1 Second '), 'YYYY-MM-DD'),
+				</if>
+				<if test="package.ntd != null">next_trial_date=TO_DATE ((TIMESTAMP 'epoch' +
+					#{package.ntd.$date}/1000 * INTERVAL '1 Second
+					'), 'YYYY-MM-DD'),
+				</if>
+				<if test="package.lu != null">last_updated_date=TO_DATE ((TIMESTAMP 'epoch' +
+					#{package.lu.$date}/1000 * INTERVAL '1 Second
+					'), 'YYYY-MM-DD'),
+				</if>
+				<if test="package.lsd != null">last_scan_date=TO_DATE ((TIMESTAMP 'epoch' +
+					#{package.lsd.$date}/1000 * INTERVAL '1 Second
+					'), 'YYYY-MM-DD'),
+				</if>
+				<if test="package.adt != null">action_date=TO_DATE ((TIMESTAMP 'epoch' +
+					#{package.adt.$date}/1000 * INTERVAL '1 Second '),
+					'YYYY-MM-DD'),
+				</if>
+				<if test="package.inv != null and package.inv.dt != null">invoice_date=TO_DATE ((TIMESTAMP 'epoch' +
+					#{package.inv.dt.$date}/1000 *
+					INTERVAL '1 Second '), 'YYYY-MM-DD'),
+				</if>
+				<if test="package.inv != null and package.inv.rdt != null">remittance_date=TO_DATE ((TIMESTAMP 'epoch' +
+					#{package.inv.rdt.$date}/1000 * INTERVAL '1 Second '),
+					'YYYY-MM-DD'),
+				</if>
+				<if test="package.frd != null">first_datetime_return_shipment_date=TO_DATE ((TIMESTAMP
+					'epoch' + #{package.frd.$date}/1000 *
+					INTERVAL '1 Second '), 'YYYY-MM-DD'),
+				</if>
+				<if test="package.frpd != null">first_pending_datetime_return_shipment_date=TO_DATE
+					((TIMESTAMP 'epoch' +
+					#{package.frpd.$date}/1000 * INTERVAL '1 Second '), 'YYYY-MM-DD'),
+				</if>
+				<if test="package.frbd != null">first_bagging_datetime_return_shipment_date=TO_DATE
+					((TIMESTAMP 'epoch' +
+					#{package.frbd.$date}/1000 * INTERVAL '1 Second '), 'YYYY-MM-DD'),
+				</if>
+				<if test="package.frdd != null">first_dispatch_datetime_return_shipment_date=TO_DATE
+					((TIMESTAMP 'epoch' +
+					#{package.frdd.$date}/1000 * INTERVAL '1 Second '), 'YYYY-MM-DD'),
+				</if>
+				<if test="package.cd != null">created_datetime= (TIMESTAMP 'epoch' +
+					#{package.cd.$date}/1000 * INTERVAL '1 Second '),</if>
+				<if test="package.od != null">order_datetime=(TIMESTAMP 'epoch' +
+					#{package.od.$date}/1000 * INTERVAL '1 Second '),</if>
+				<if test="package.pd != null">pickup_ship_datetime=(TIMESTAMP 'epoch' +
+					#{package.pd.$date}/1000 * INTERVAL '1 Second '),
+				</if>
+				<if test="package.ivd != null">incoming_verified_datetime=(TIMESTAMP 'epoch' +
+					#{package.ivd.$date}/1000 * INTERVAL '1
+					Second '),
+				</if>
+				<if test="package.fpd != null">first_pending_datetime=(TIMESTAMP 'epoch' +
+					#{package.fpd.$date}/1000 * INTERVAL '1 Second
+					'),
+				</if>
+				<if test="package.ftd != null">first_trial_datetime=(TIMESTAMP 'epoch' +
+					#{package.ftd.$date}/1000 * INTERVAL '1 Second
+					'),
+				</if>
+				<if test="package.ldd != null">last_dispatch_datetime=(TIMESTAMP 'epoch' +
+					#{package.ldd.$date}/1000 * INTERVAL '1 Second
+					'),
+				</if>
+				<if test="package.fbd != null">first_bagging_datetime=(TIMESTAMP 'epoch' +
+					#{package.fbd.$date}/1000 * INTERVAL '1 Second
+					'),
+				</if>
+				<if test="package.rd != null">returned_datetime=(TIMESTAMP 'epoch' +
+					#{package.rd.$date}/1000 * INTERVAL '1 Second '),</if>
+				<if test="package.fdd != null">first_dispatch_datetime=(TIMESTAMP 'epoch' +
+					#{package.fdd.$date}/1000 * INTERVAL '1 Second
+					'),
+				</if>
+				<if test="package.ed != null">expected_datetime=(TIMESTAMP 'epoch' +
+					#{package.ed.$date}/1000 * INTERVAL '1 Second '),</if>
+				<if test="package.pdd != null">promised_datetime=(TIMESTAMP 'epoch' +
+					#{package.pdd.$date}/1000 * INTERVAL '1 Second '),
+				</if>
+				<if test="package.cd != null">package_creation_datetime=(TIMESTAMP 'epoch' +
+					#{package.cd.$date}/1000 * INTERVAL '1 Second
+					'),
+				</if>
+				<if test="package.mnd != null">package_manifest_datetime=(TIMESTAMP 'epoch' +
+					#{package.mnd.$date}/1000 * INTERVAL '1 Second
+					'),
+				</if>
+				<if test="package.cpd != null">package_pickup_at_clientwarehouse_datetime= (TIMESTAMP
+					'epoch' + #{package.cpd.$date}/1000 *
+					INTERVAL '1 Second '),
+				</if>
+				<if test="package.ntd != null">next_trial_datetime=(TIMESTAMP 'epoch' +
+					#{package.ntd.$date}/1000 * INTERVAL '1 Second '),
+				</if>
+				<if test="package.lu != null">last_updated_datetime=(TIMESTAMP 'epoch' +
+					#{package.lu.$date}/1000 * INTERVAL '1 Second '),
+				</if>
+				<if test="package.lsd != null">last_scan_datetime=(TIMESTAMP 'epoch' +
+					#{package.lsd.$date}/1000 * INTERVAL '1 Second '),
+				</if>
+				<if test="package.adt != null">action_datetime=(TIMESTAMP 'epoch' +
+					#{package.adt.$date}/1000 * INTERVAL '1 Second '),</if>
+				<if test="package.inv != null and package.inv.dt != null">invoice_datetime=(TIMESTAMP 'epoch' +
+					#{package.inv.dt.$date}/1000 *
+					INTERVAL '1 Second '),
+				</if>
+				<if test="package.inv != null and inv.rdt != null">remittance_datetime=(TIMESTAMP 'epoch' +
+					#{package.inv.rdt.$date}/1000 *
+					INTERVAL '1 Second '),
+				</if>
+				<if test="package.frd != null">first_datetime_return_shipment=(TIMESTAMP 'epoch' +
+					#{package.frd.$date}/1000 * INTERVAL '1
+					Second '),
+				</if>
+				<if test="package.frpd != null">first_pending_datetime_return_shipment=(TIMESTAMP
+					'epoch' + #{package.frpd.$date}/1000 *
+					INTERVAL '1 Second '),
+				</if>
+				<if test="package.frbd != null">first_bagging_datetime_return_shipment=(TIMESTAMP
+					'epoch' + #{package.frbd.$date}/1000 *
+					INTERVAL '1 Second '),
+				</if>
+				<if test="package.frdd != null">first_dispatch_datetime_return_shipment=(TIMESTAMP
+					'epoch' + #{package.frdd.$date}/1000 *
+					INTERVAL '1 Second '),
+				</if>
+				<if test="package.nm != null">consignee_name=#{package.nm},</if>
+				<if test="package.add_1 != null">consignee_address_1=#{package.add_1},</if>
+				<if test="package.add_2 != null">consignee_address_2=#{package.add_2},</if>
+				<if test="package.cty != null">consignee_city=#{package.cty},</if>
+				<if test="package.st != null">consignee_state=#{package.st},</if>
+				<if test="package.cnt != null">consignee_country=#{package.cnt},</if>
+				<if test="package.pin != null">consignee_pincode=#{package.pin},</if>
+				<if test="package.em != null">consignee_email=#{package.em},</if>
+				<if test="package.ph_1 != null">consignee_phone_1=#{package.ph_1},</if>
+				<if test="package.ph_2 != null">consignee_phone_2=#{package.ph_2},</if>
+				<if test="package.ph_3 != null">consignee_phone_3=#{package.ph_3},</if>
+				<if test="package.aseg != null and package.aseg.lon != null">addr_segment_longitude=#{package.aseg.lon},</if>
+				<if test="package.aseg != null and package.aseg.lat != null">addr_segment_latitude=#{package.aseg.lat},</if>
+				<if test="package.aseg != null and package.aseg.pin != null">addr_segment_pincode=#{package.aseg.pin},</if>
+				<if test="package.aseg != null and package.aseg.mismatch != null">addr_segment_mismatch=#{package.aseg.mismatch},</if>
+				<if test="package.aseg != null and package.aseg.loc != null">addr_segment_locality_id=#{package.aseg.loc},</if>
+				<if test="package.aseg != null and package.aseg.sloc != null">addr_segment_locality_id_sub=#{package.aseg.sloc},</if>
+				<if test="package.aseg != null and package.aseg.aloc != null">addr_segment_locality_id_additional=#{package.aseg.aloc},</if>
+				last_updated_time=SYSDATE
+			</set>
+			where mongo_id=#{package._id}
+		</foreach>
+	</update>
+
+	<select id="findDeliveryCenter" resultType="HashMap">
+		SELECT * FROM deliverycenters_deliverycenter where name = #{name}
+	</select>
+
+	<select id="selectPackageData" parameterType="java.lang.String"
+		resultType="java.util.Map">
+		select * from package where mongo_id = #{id} limit 1
+	</select>
+
+	<select id="selectScans" parameterType="java.lang.String"
+		resultType="Hashmap">
+		select * from scan_facts where waybillnum = #{wbn} order by
+		last_updated_time;
+	</select>
+
+
+	<update id="updateScan" parameterType="java.util.List">
+		<foreach collection="list" separator=";" item="scan">
+			update scan_facts
+			<set>
+				<if test="scan.pickup_manifestreceived != null">pickup_manifestreceived=#{scan.pickup_manifestreceived},</if>
+				<if test="scan.pickup_clientpickup != null">pickup_clientpickup=#{scan.pickup_clientpickup},</if>
+				<if test="scan.incomingverified_pickup != null">incomingverified_pickup=#{scan.incomingverified_pickup},</if>
+				<if test="scan.firstbagging_incomingverified != null">firstbagging_incomingverified=#{scan.firstbagging_incomingverified},</if>
+				<if test="scan.firstdispatch_firstpending != null">firstdispatch_firstpending=#{scan.firstdispatch_firstpending},</if>
+				<if test="scan.lastdispatch_firstdispatch != null">lastdispatch_firstdispatch=#{scan.lastdispatch_firstdispatch},</if>
+				<if test="scan.firstreturn_pickup != null">firstreturn_pickup=#{scan.firstreturn_pickup},</if>
+				<if test="scan.firstbaggingforreturn_firstreturn != null">firstbaggingforreturn_firstreturn=#{scan.firstbaggingforreturn_firstreturn},</if>
+				<if test="scan.firstpendingforreturn_firstdispatchforreturn != null">firstpendingforreturn_firstdispatchforreturn=#{scan.firstpendingforreturn_firstdispatchforreturn},</if>
+				<if test="scan.promised_pickup != null">promised_pickup=#{scan.promised_pickup},</if>
+				<if test="scan.firstdispatch_pickup != null">firstdispatch_pickup=#{scan.firstdispatch_pickup},</if>
+				<if test="scan.firstdispatch_incomingverified != null">firstdispatch_incomingverified=#{scan.firstdispatch_incomingverified},</if>
+				<if test="scan.now_currentscanned != null">now_currentscanned=#{scan.now_currentscanned},</if>
+				<if test="scan.currentscanned_pickup != null">currentscanned_pickup=#{scan.currentscanned_pickup},</if>
+				<if test="scan.now_pickup != null">now_pickup=#{scan.now_pickup},</if>
+				<if test="scan.time_in_system != null">time_in_system=#{scan.time_in_system},</if>
+				<if test="scan.time_since_last_scan != null">time_since_last_scan=#{scan.time_since_last_scan},</if>
+				<if test="scan.time_spent_in_facility != null">time_spent_in_facility= #{scan.time_spent_in_facility},</if>
+				<if test="scan.time_on_road != null">time_on_road=#{scan.time_on_road},</if>
+				<if test="scan.returns_pickedup_date != null">returns_pickedup_date=#{scan.returns_pickedup_date},</if>
+				<if test="scan.returns_closure_time != null">returns_closure_time=#{scan.returns_closure_time},</if>
+				<if test="scan.returns_closed_date != null">returns_closed_date=#{scan.returns_closed_date},</if>
+				<if test="scan.field_user_user_id != null">field_user_user_id=#{scan.field_user_user_id},
+				</if>
+				last_updated_time=SYSDATE
+			</set>
+			where last_updated_time=#{scan.last_updated_time} and waybillnum =
+			#{scan.wbn}
+		</foreach>
+	</update>
+
+	<select id="selectWaybillnum" parameterType="java.lang.String"
+		resultType="java.lang.String">
+		select waybillnum from package where mongo_id = #{id} limit 1
+	</select>
+
+	<delete id="deletePackage" parameterType="java.lang.String">
+		delete from package where waybillnum = #{waybillnum}
+	</delete>
+
+	<delete id="deleteScanFacts" parameterType="java.lang.String">
+		delete from scan_facts where waybillnum = #{waybillnum}
+	</delete>
+</mapper>
